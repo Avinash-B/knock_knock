@@ -27,31 +27,33 @@ SECRET_KEY = '=2^#(2qb0sbbic0*5^8c6mjsoo_xquw5sehms@p6@wpf5z8l1c'
 DEBUG = True
 
 ALLOWED_HOSTS = ['knockknock.in.net', '206.189.142.107', 'www.knockknock.in.net', '127.0.0.1']
-
+# SECURE_SSL_REDIRECT = False
 
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'social_django',
+    # 'social_django',
     'event',
 ]
 AUTH_USER_MODEL = 'event.CustomUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'social_django.middleware.SocialAuthExceptionMiddleware',
+    # 'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -79,8 +81,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
 
-                'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect',
+                # 'social_django.context_processors.backends',
+                # 'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -90,8 +92,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'knock_knock.wsgi.application'
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='480434180356-49ocuk56vqf3gnmbjqaerrgp2jovdu3c.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 't-2Y7p8PI8xavaFuZf-sbmtT'
+# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='480434180356-49ocuk56vqf3gnmbjqaerrgp2jovdu3c.apps.googleusercontent.com'
+# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 't-2Y7p8PI8xavaFuZf-sbmtT'
 
 
 # Database
@@ -141,12 +143,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-STATIC_ROOT = "/home/mntc/knockknock/knock_knock/staticfiles/"
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
 STATIC_URL = '/static/'
+
 STATICFILES_DIRS = [
-   'templates/',
+    'templates/'
 ]
+
 
 
 LOGIN_URL = 'login'

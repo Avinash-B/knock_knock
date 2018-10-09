@@ -33,7 +33,7 @@ urlpatterns = [
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='password_reset_done.html'), name='password_reset_done'),
     path(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',auth_views.PasswordResetConfirmView.as_view(template_name='password.html'), name='password_reset_confirm'),
     path('reset/done/', views.reset_done, name='password_reset_complete'),
-    path('oauth/', include('social_django.urls', namespace='social')),
+    # path('oauth/', include('social_django.urls', namespace='social')),
     path('login/', LoginView.as_view(template_name='signin.html'), name = 'login'),
     path('logout/', LogoutView.as_view(next_page=reverse_lazy('login')), name='logout'),
 ]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

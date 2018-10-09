@@ -4,3 +4,7 @@
 ./event/migrations/
 
 ./knock_knock/__pycache__/
+
+
+./.idea/
+./venv/

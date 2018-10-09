@@ -7,7 +7,6 @@ from django.urls import reverse
 
 # Create your models here.
 class CustomUser(AbstractUser):
-    DoesNotExist = None
     score = models.IntegerField(default=0, blank= True)
     contact = models.CharField(max_length=10, blank= True)
     time_submission = models.DateTimeField(default=now)
